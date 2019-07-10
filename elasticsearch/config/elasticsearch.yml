@@ -1,0 +1,99 @@
+# cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+
+
+################################### Cluster ###################################
+cluster.name: "docker-cluster"
+
+
+################################### Node ###################################
+node.name: "node-1"
+node.master: true
+node.data: true
+# node.local: ${NODE_LOCAL}
+node.ingest: true
+
+#network.host: ${NETWORK_HOST}
+
+#################################### Paths ####################################
+# path.data: ${PATH_DATA}/data
+
+# path.logs: ${PATH_DATA}/log
+# path.work: ${PATH_DATA}/work
+# path.plugins: /elasticsearch/plugins
+
+################################### Memory ####################################
+# ElasticSearch performs poorly when JVM starts swapping: you should ensure that
+# it _never_ swaps.
+#
+# Set this property to true to lock the memory:
+#
+
+############################## Network And HTTP ###############################
+# ElasticSearch, by default, binds itself to the 0.0.0.0 address, and listens
+# on port [9200-9300] for HTTP traffic and on port [9300-9400] for node-to-node
+# communication. (the range means that if the port is busy, it will automatically
+# try the next port).
+# http.enabled: ${HTTP_ENABLE}
+#transport.tcp.compress: true
+# http.compression: true
+
+
+################################## Discovery ##################################
+discovery.type: single-node
+#discovery.zen:
+#  minimum_master_nodes: ${NUMBER_OF_MASTERS}
+#  ping.unicast.hosts: elasticsearch
+# plugin.mandatory: discovery-kubernetes
+# cloud.kubernetes.service: ${DISCOVERY_SERVICE}
+# cloud.kubernetes.namespace: ${NAMESPACE}
+
+#################################### Index ####################################
+# index.number_of_shards: ${NUMBER_OF_SHARDS}
+# index.number_of_replicas: ${NUMBER_OF_REPLICAS}
+
+#################################### XPACK ####################################
+#xpack.security.enabled: true
+#xpack.security.transport.ssl.enabled: ${XPACK_SECURITY_TRANSPORT_SSL_ENABLE}
+#xpack.security.http.ssl.enabled: ${XPACK_SECURITY_HTTP_SSL_ENABLE}
+#xpack.security.transport.ssl.verification_mode: certificate
+#xpack.security.audit.enabled: true
+#xpack.security.audit.outputs: ${XPACK_SECURITY_AUDIT_OUTPUTS}
+#xpack.ssl.key: ${XPACK_SSL_KEY_PATH}
+#xpack.ssl.certificate: ${XPACK_SSL_CERT_PATH}
+#xpack.ssl.certificate_authorities: [ "${XPACK_SSL_CA_CERT_PATH}" ]
+xpack.monitoring.enabled: true
+xpack.ml.enabled: true
+xpack.watcher.enabled: true
+
+#################################### NOTIFICATION XPACK ####################################
+#xpack.notification.email.account.ses_account.email_defaults.from: ${XPACK_EMAIL_DEFAULTS_FROM}
+#xpack.notification.email.account.ses_account.smtp.auth: ${XPACK_EMAIL_SMTP_AUTH}
+#xpack.notification.email.account.ses_account.smtp.starttls.enable: ${XPACK_EMAIL_SMTP_STARTTLS_ENABLE}
+#xpack.notification.email.account.ses_account.smtp.starttls.required: ${XPACK_EMAIL_SMTP_STARTTLS_REQUIRED}
+#xpack.notification.email.account.ses_account.smtp.host: ${XPACK_EMAIL_SMTP_HOST}
+#xpack.notification.email.account.ses_account.smtp.port: ${XPACK_EMAIL_SMTP_PORT}
+#xpack.notification.email.account.ses_account.smtp.user: ${XPACK_EMAIL_SMTP_USER}
+#xpack.notification.email.account.ses_account.smtp.password: ${XPACK_EMAIL_SMTP_PASS}
+
+
+################################## Indices settings ##################################
+
+#indices.memory.index_buffer_size: 20%
+#indices.memory.min_index_buffer_size: 96mb
+#indices.memory.min_shard_index_buffer_size: 12mb
+
+# Force all memory to be locked, forcing the JVM to never swap
+#bootstrap.memory_lock: true 
+
+# Node query cache (disable for now - because no need to cache on event based apm infrastructure) https://www.elastic.co/guide/en/elasticsearch/reference/current/query-cache.html
+#index.queries.cache.enabled: false
+
+# Cache Sizes
+#indices.fielddata.cache.size: 15%
+#indices.fielddata.cache.expire: 6h
+#indices.cache.filter.size: 15%
+#indices.cache.filter.expire: 6h
+
+# Node query cache (disable for now - because no need to cache on event based apm infrastructure) https://www.elastic.co/guide/en/elasticsearch/reference/current/query-cache.html
+# index.queries.cache.enabled: false
